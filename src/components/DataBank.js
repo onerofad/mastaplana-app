@@ -604,8 +604,19 @@ export const DataBank = ({mobile}) => {
                                  color="green"
                                  loading={loading}
                             >
-                                <Icon name={check} />
-                                Upload
+                                {
+                                    (check ?
+                                        <>
+                                            <Icon name={check} />
+                                            Upload
+                                        </>
+                                        :
+                                        <>
+                                            Upload
+                                        </>
+                                    )
+                                }
+                               
                             </Button>
                         </Form>
                     </Modal.Content>

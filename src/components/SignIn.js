@@ -53,7 +53,7 @@ const SignIn = ({mobile}) => {
         <Segment vertical style={{backgroundColor: '#133467', margin: mobile ? 20 : 40}}>
                 <Grid textAlign="center" style={{height: mobile ? '60vh' : '75vh'}} verticalAlign="middle">
                     <Grid.Row>
-                        <Grid.Column textAlign="left" verticalAlign="middle">
+                        <Grid.Column textAlign="right" verticalAlign="middle">
                             <Link style={{ fontSize: 20, color: '#fff'}} to="/send_file">
                                 <Icon inverted name="angle left" color="green" size={mobile ? 'large' : 'big'} />
                                     Send File
