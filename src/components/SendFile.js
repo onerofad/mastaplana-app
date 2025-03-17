@@ -209,6 +209,7 @@ export const SendFile = ({mobile}) => {
                                 fontWeight: 400,
                                 fontStyle: 'normal'
                             }}
+                            textAlign="center"
                     />
                     </Grid.Column>
                     <Grid.Column textAlign="right" width={mobile ? 6 : 4} verticalAlign="middle">
