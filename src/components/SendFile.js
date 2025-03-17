@@ -192,7 +192,7 @@ export const SendFile = ({mobile}) => {
         <Segment vertical style={{backgroundColor: '#133467', margin: mobile ? 10 : 40}}>
             <Grid>
                 <Grid.Row>
-                    <Grid.Column width={mobile ? 6 : 6} textAlign="left" verticalAlign="middle">
+                    <Grid.Column width={mobile ? 5 : 6} textAlign="left" verticalAlign="middle">
                         <Link style={{ fontSize: 20, color: '#fff'}} to="/signin">
                             {/*<Icon inverted name="angle left" color="green" size={mobile ? 'large' : 'big'} />*/}
                                 Sign in
@@ -211,7 +211,7 @@ export const SendFile = ({mobile}) => {
                             }}
                     />
                     </Grid.Column>
-                    <Grid.Column textAlign="right" width={mobile ? 4 : 4} verticalAlign="middle">
+                    <Grid.Column textAlign="right" width={mobile ? 5 : 4} verticalAlign="middle">
                         <Header inverted content={ mobile ? 'Sign up' : 'Member Sign up'} color="#fff" />
                     </Grid.Column>
                     </Grid.Row>   
