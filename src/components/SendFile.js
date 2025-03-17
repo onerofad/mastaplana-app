@@ -198,7 +198,7 @@ export const SendFile = ({mobile}) => {
                                 Sign in
                         </Link>
                     </Grid.Column>
-                    <Grid.Column width={ mobile ? 6 : 6} verticalAlign="middle">
+                    <Grid.Column width={ mobile ? 5 : 6} verticalAlign="middle">
                         <Header 
                             as={ mobile ? 'h4' : 'h1'} 
                             inverted 
@@ -211,7 +211,7 @@ export const SendFile = ({mobile}) => {
                             }}
                     />
                     </Grid.Column>
-                    <Grid.Column textAlign="right" width={mobile ? 5 : 4} verticalAlign="middle">
+                    <Grid.Column textAlign="right" width={mobile ? 6 : 4} verticalAlign="middle">
                         <Header inverted content={ mobile ? 'Sign up' : 'Member Sign up'} color="#fff" />
                     </Grid.Column>
                     </Grid.Row>   
