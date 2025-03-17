@@ -14,7 +14,7 @@ const LaunchPage = ({mobile}) => {
 
 
     if(loading){
-        return navigate('/send_file')
+        return navigate('/signin')
     }else{
     return(
         <Container>

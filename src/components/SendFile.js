@@ -247,6 +247,16 @@ export const SendFile = ({mobile}) => {
                                                                 placeholder="Your Recepient Email"
                                                             />
                                                         </Form.Field>
+                                                        <Form.Field>
+                                                            <Form.Input
+                                                                fluid
+                                                                value={email}
+                                                                error={emailError}
+                                                                onChange={handleEmail}
+                                                                onClick={() => setemailError(false)}
+                                                                placeholder="Sender Email"
+                                                            />
+                                                        </Form.Field>
                                                     </Form>
                                                     {
                                                         imgFiles.length === 0 ?
