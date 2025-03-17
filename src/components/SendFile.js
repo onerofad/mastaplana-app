@@ -212,7 +212,9 @@ export const SendFile = ({mobile}) => {
                     />
                     </Grid.Column>
                     <Grid.Column textAlign="right" width={mobile ? 6 : 4} verticalAlign="middle">
-                        <Header inverted content={ mobile ? 'Sign up' : 'Member Sign up'} color="#fff" />
+                        <Link style={{ fontSize: 20, color: '#fff'}} to="/signup">
+                            <span>{ mobile ? 'Sign up' : 'Member Sign up'}</span>
+                        </Link>
                     </Grid.Column>
                     </Grid.Row>   
                     <Grid.Row>
