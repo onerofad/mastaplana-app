@@ -131,14 +131,12 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
                     Table Data
                     <Icon 
                         link={true} 
-                        style={{float: 'right'}} 
+                        style={{float: 'right', verticalAlign: 'middle'}} 
                         name="close" 
                         size="small" 
                         onClick={() => closeModal()}
                     />
-                    {/*
-                    <Icon link={true} style={{float: 'right'}} name="close" onClick={() => closeModal()} />
-                    */}
+                   
                 </Modal.Header>
                     <Modal.Content>
                         <Grid stackable divided> 
