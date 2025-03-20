@@ -202,6 +202,22 @@ export const apiSlice = createApi({
                 body: item
             })
         }),
+        tabularData: builder.mutation({
+            query: item => ({
+                url: 'table_data/',
+                method: 'POST',
+                body: item
+            })
+        }),
+        getTables: builder.query({
+            query: () => '/table_data'
+        }),
+        deleteTable: builder.mutation({
+            query: (id) => ({
+                url: `/table_data/${id}`,
+                method: 'DELETE'
+            })
+        }),
 
     })
     
@@ -225,5 +241,6 @@ export const {
     useCreateFolderMutation, useGetfoldersQuery,
     useUploadFiletoFolderMutation, useGetUploadFiletoFolderQuery,
     useDeleteFileMutation, useDeleteFolderMutation,
-    useSubmitMessageMutation
+    useSubmitMessageMutation,
+    useTabularDataMutation, useGetTablesQuery, useDeleteTableMutation
 } = apiSlice
