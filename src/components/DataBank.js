@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react"
+import { useEffect, useReducer, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { Form, Button, Card, Container, Dropdown, Menu, Header, Grid, Icon, Modal, Segment, List } from "semantic-ui-react"
 import { useCreateFolderMutation, useDeleteFileMutation, useDeleteFolderMutation, useGetfoldersQuery, useGetUploadFiletoFolderQuery, useUploadFiletoFolderMutation } from "../features/api/apiSlice"
@@ -37,6 +37,12 @@ function uploadReducer(state, action){
 }
 
 export const DataBank = ({mobile}) => {
+
+    useEffect(() => {
+        if(folder.length === 0){
+            setcreatefolder_open(true)
+        }
+    }, [])
 
     const navigate = useNavigate()
 
@@ -101,6 +107,7 @@ export const DataBank = ({mobile}) => {
                       await createFolder({f_name, f_owner, f_link}).unwrap()
                       setdummy_file(null)
                       setloading(false)
+                      setcreatefolder_open(false)
                       dispatch({type: 'open', size: 'mini'})
 
                 //}
@@ -123,9 +130,9 @@ export const DataBank = ({mobile}) => {
         dispatch({type: 'open_upload', size_upload: 'mini'})
     }
 
-    const {data:folders, isSuccess} = useGetfoldersQuery()
+    const {data:folders, isSuccess, refetch} = useGetfoldersQuery()
 
-    const [createfolder_open, setcreatefolder_open] = useState(true)
+    const [createfolder_open, setcreatefolder_open] = useState(false)
 
     let folderList
     let folder = []
@@ -158,8 +165,9 @@ export const DataBank = ({mobile}) => {
                     <br/>
                 </Grid.Column>
         ))
+       
     }
-
+    
     const {data:folder_files} = useGetUploadFiletoFolderQuery()
 
     let fileToFolderList
@@ -448,19 +456,13 @@ export const DataBank = ({mobile}) => {
                                                 </Grid.Column>
                                                 </Grid.Row>
                                                 {
-                                                    createfolder_open ?
+                                                    (createfolder_open) ?
                                                     <Grid>
-                                                    <Grid.Row>
-                                                        <Grid.Column>
-                                                            <Icon name="folder" color="green" size="massive" />
-                                                            {/*<Header as={mobile ? "h5" : "h4"}>
-                                                                <Icon name="folder" />
-                                                                <Header.Content>
-                                                                    Create Folder
-                                                                </Header.Content>
-                                                            </Header>*/}
-                                                        </Grid.Column>
-                                                    </Grid.Row>
+                                                        <Grid.Row>
+                                                            <Grid.Column>
+                                                                <Icon name="folder" color="green" size="massive" />
+                                                            </Grid.Column>
+                                                        </Grid.Row>
                                                     <Grid.Row>
                                                         <Grid.Column>
                                                             <Form>
@@ -478,17 +480,6 @@ export const DataBank = ({mobile}) => {
                                                     </Grid.Row>
                                                     <Grid.Row>
                                                         <Grid.Column>
-                                                            { mobile ?
-                                                            <Button
-                                                                onClick={() => setcreatefolder_open(false)}
-                                                                size="large"
-                                                                color="green"
-                                                                floated="left"
-                                                                content="View"
-                                                            />
-                                                            :
-                                                            <></>
-                                                            }
                                                             <Button
                                                                 onClick={() => clickFolder()} 
                                                                 size="big" 
@@ -512,10 +503,6 @@ export const DataBank = ({mobile}) => {
                                                             </Header.Content>
                                                         </Header>
                                                     </Grid.Column>
-                                                    {/*<Grid.Column width={6}>
-                                                        <Icon name="refresh" />
-                                                            Refresh
-                                                    </Grid.Column>*/}
                                                 </Grid.Row>
                                                 <Grid.Row columns={mobile ? 2 : 4}>
                                                     {folderList}
@@ -528,10 +515,11 @@ export const DataBank = ({mobile}) => {
                                                                 color="green"
                                                                 icon="plus"
                                                                 circular
-                                                                size="big"
+                                                                size="large"
                                                                 floated="right"
                                                                 onClick={() => setcreatefolder_open(true)}
                                                             />
+                                                                
                                                         </Grid.Column>
                                                     </Grid.Row>
                                                     :
