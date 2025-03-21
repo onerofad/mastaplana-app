@@ -132,8 +132,15 @@ export const SendFile = ({mobile}) => {
     const [email, setEmail] = useState("")
     const [emailError, setemailError] = useState(false)
 
+    const [email1, setEmail1] = useState("")
+    const [emailError1, setemailError1] = useState(false)
+
     const handleEmail = (e) => {
         setEmail(e.target.value)
+    }
+
+    const handleEmail1 = (e) => {
+        setEmail1(e.target.value)
     }
 
     const [uploadedImgFiles, setUploadedImgFiles] = useState([])
@@ -251,10 +258,10 @@ export const SendFile = ({mobile}) => {
                                                         <Form.Field>
                                                             <Form.Input
                                                                 fluid
-                                                                value={email}
-                                                                error={emailError}
-                                                                onChange={handleEmail}
-                                                                onClick={() => setemailError(false)}
+                                                                value={email1}
+                                                                error={emailError1}
+                                                                onChange={handleEmail1}
+                                                                onClick={() => setemailError1(false)}
                                                                 placeholder="Sender Email"
                                                             />
                                                         </Form.Field>
