@@ -417,7 +417,7 @@ const Document = ({mobile}) => {
                                         </Grid.Column>
                                         <Grid.Column verticalAlign="middle"  width={mobile ? 16 : 4} style={{marginTop: 10}}>
                                             <Grid>
-                                                <Grid.Row>
+                                                {/*<Grid.Row>
                                                     <Grid.Column>
                                                         <Button 
                                                             fluid size="large" 
@@ -427,7 +427,7 @@ const Document = ({mobile}) => {
                                                             Save Form Data
                                                         </Button>
                                                     </Grid.Column>
-                                                </Grid.Row>
+                                                </Grid.Row>*/}
                                                 <Grid.Row>
                                                 <Grid.Column>
                                                         <Button 
@@ -452,7 +452,7 @@ const Document = ({mobile}) => {
                                                         </Button>
                                                     </Grid.Column>
                                                 </Grid.Row>
-                                                <Grid.Row>
+                                                {/*<Grid.Row>
                                                 <Grid.Column>
                                                         <Button 
                                                             fluid 
@@ -464,7 +464,7 @@ const Document = ({mobile}) => {
                                                             Save Tabular Data
                                                         </Button>
                                                     </Grid.Column>
-                                                </Grid.Row>
+                                                </Grid.Row>*/}
                                             </Grid>
                                             
                                         </Grid.Column>
