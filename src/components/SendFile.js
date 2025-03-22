@@ -158,6 +158,8 @@ export const SendFile = ({mobile}) => {
 
         if(email === ''){
             setemailError({content: 'Recepient email is empty', pointing: 'below'})
+        }else if(email1 === ''){
+            setemailError1({content: 'Sender email is empty', pointing: 'below'})
         }else if(imgFiles.length === 0){
             dispatch({type: 'open_error', size_error: "mini"})
         }else{
@@ -184,6 +186,8 @@ export const SendFile = ({mobile}) => {
                      uploadedImages.push(data.secure_url)
                      setLoading(false)
                      dispatch({type: 'open', size: "mini"})
+                     setEmail("")
+                     setEmail1("")
 
             }catch(error){
                 console.log('Cloudinary Image Error', error)
@@ -262,7 +266,7 @@ export const SendFile = ({mobile}) => {
                                                                 error={emailError1}
                                                                 onChange={handleEmail1}
                                                                 onClick={() => setemailError1(false)}
-                                                                placeholder="Sender Email"
+                                                                placeholder="Your Sender Email"
                                                             />
                                                         </Form.Field>
                                                     </Form>

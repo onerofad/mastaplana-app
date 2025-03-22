@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { Form, Button, Card, Container, Dropdown, Menu, Header, Grid, Icon, Modal, Segment, List } from "semantic-ui-react"
+import { Form, Button, Card, Container, Dropdown, Menu, Header, Grid, Icon, Modal, Segment, List, Divider } from "semantic-ui-react"
 import { useCreateFolderMutation, useDeleteFileMutation, useDeleteFolderMutation, useGetfoldersQuery, useGetUploadFiletoFolderQuery, useUploadFiletoFolderMutation } from "../features/api/apiSlice"
 
 const initialState = {
@@ -38,12 +38,7 @@ function uploadReducer(state, action){
 
 export const DataBank = ({mobile}) => {
 
-    useEffect(() => {
-        if(folder.length === 0){
-            setcreatefolder_open(true)
-        }
-    }, [])
-
+   
     const navigate = useNavigate()
 
     const [state, dispatch] = useReducer(uploadReducer, initialState)
@@ -74,6 +69,11 @@ export const DataBank = ({mobile}) => {
         //const reader = new FileReader()
         //reader.readAsDataURL(myBlob)
     }
+
+    const {data:folders, isSuccess, refetch} = useGetfoldersQuery()
+
+    const [createfolder_open, setcreatefolder_open] = useState(false)
+
 
     const [createFolder, {isLoading}] = useCreateFolderMutation()
     const saveFolder = [f_name].every(Boolean) && !isLoading
@@ -109,6 +109,7 @@ export const DataBank = ({mobile}) => {
                       setloading(false)
                       setcreatefolder_open(false)
                       dispatch({type: 'open', size: 'mini'})
+                      refetch()
 
                 //}
             }catch(error){
@@ -130,17 +131,13 @@ export const DataBank = ({mobile}) => {
         dispatch({type: 'open_upload', size_upload: 'mini'})
     }
 
-    const {data:folders, isSuccess, refetch} = useGetfoldersQuery()
-
-    const [createfolder_open, setcreatefolder_open] = useState(false)
-
     let folderList
     let folder = []
     if(isSuccess){
         folder = folders.filter(f => f.f_owner === sessionStorage.getItem("email"))
         folderList = folder.map(f => (
                 <Grid.Column>
-                    <Card fluid>
+                    <Card>
                         <Card.Content>
                         <Dropdown simple style={{float: 'right'}}>
                             <Dropdown.Menu>
@@ -158,7 +155,12 @@ export const DataBank = ({mobile}) => {
                             <Icon name="folder" size="big" inverted color="green" />
                             
                             <Header as="h4">
-                                {f.f_name}
+                                {
+                                  f.f_name.length > 7 ?
+                                    <Header as="h4" content={mobile ? f.f_name : f.f_name.substr(0, 4) + '...'} />
+                                  :
+                                    <Header as="h4" content={f.f_name} />  
+                                }
                             </Header>
                         </Card.Content>
                     </Card>
@@ -188,6 +190,7 @@ export const DataBank = ({mobile}) => {
             await removeFolder(id).unwrap()
             setloading(false)
             set_delete_folder_check("check")
+            refetch()
         }catch(error){
             console.log("An error has occurred " + error)
         }
@@ -369,6 +372,13 @@ export const DataBank = ({mobile}) => {
        }*/
     }
 
+    useEffect(() => {
+        if(folder.length === 0){
+            setcreatefolder_open(true)
+        }
+    }, [])
+
+
     return(
         <Container>
         <Segment vertical style={{backgroundColor: '#133467', margin: mobile ? 20 : 40}}>
@@ -430,19 +440,25 @@ export const DataBank = ({mobile}) => {
                                             mobile ? <></> :
                                         <Grid.Column width={mobile ? 4 : 3}>
                                             <Header dividing as={mobile ? "h4" : "h2"} content="Media" />
-                                            <Menu size={mobile ? "mini" : ''} secondary vertical>
+                                            <Menu size='mini' secondary vertical>
                                                 <Menu.Item 
-                                                    name="Create Folder" 
                                                     as="h4"
                                                     header
+                                                    link={true}
                                                     onClick={() => setcreatefolder_open(true)}
-                                                />
+                                                >
+                                                    <Icon color="green" name="folder" />
+                                                    Create
+                                                </Menu.Item>
                                                 <Menu.Item 
-                                                    name= {mobile ? "Folder" : "View Folder"}
                                                     as="h4" 
                                                     header
+                                                    link={true}
                                                     onClick={() => setcreatefolder_open(false)}       
-                                                />
+                                                >
+                                                    <Icon color="green" name="open folder" />
+                                                    View
+                                                </Menu.Item>
 
                                             </Menu>
                                            
@@ -494,15 +510,31 @@ export const DataBank = ({mobile}) => {
                                                 </Grid> 
                                                 :
                                                 <Grid>
-                                                <Grid.Row>  
-                                                    <Grid.Column>
+                                                <Grid.Row verticalAlign="middle">  
+                                                    <Grid.Column width={8}>
+                                                       
                                                         <Header as={mobile ? "h5" : "h4"}>
                                                             <Icon name="folder" color="green" /> 
                                                             <Header.Content>
                                                                 All Folders ({folder.length})
                                                             </Header.Content>
                                                         </Header>
+                                                        
                                                     </Grid.Column>
+                                                    <Grid.Column textAlign="right" width={8}>
+                                                        <Button 
+                                                            icon 
+                                                            basic 
+                                                            color="green" 
+                                                            size="ti" 
+                                                            onClick={() => navigate('/data_bank')}
+                                                        >
+                                                            <Icon color="green" name="refresh" />
+                                                            Reload
+                                                                
+                                                        </Button>
+                                                    </Grid.Column>
+                                                    
                                                 </Grid.Row>
                                                 <Grid.Row columns={mobile ? 2 : 4}>
                                                     {folderList}
@@ -708,16 +740,21 @@ export const DataBank = ({mobile}) => {
                     <Modal.Content>
                         <Button 
                             positive 
-                            content="Yes" 
                             onClick={() => delete_file(file_id)}
                             loading={loading}
-                            icon={delete_btn_check}
-                        />
-                        <Button 
-                            negative 
-                            content="No" 
-                            onClick={() => dispatch({type: 'close'})}
-                        />
+                        >
+                            {
+                                delete_btn_check ? 
+                                <>
+                                    <Icon name="check"  />
+                                    Yes
+                                </>
+                                :
+                                <>
+                                    Yes
+                                </>
+                            }
+                        </Button>
                     </Modal.Content>
                 </Modal>
                 <Modal
@@ -727,11 +764,12 @@ export const DataBank = ({mobile}) => {
                     <Modal.Header>
                         Delete Folder
                         <Icon 
-                            style={{float: 'right'}} 
+                            style={{float: 'right', verticalAlign: 'middle'}} 
                             name="close" 
                             size="small" 
                             onClick={() => dispatch({type: 'close'}) }
                             link={true}
+                            
                         />
                     </Modal.Header>
                     <Modal.Content>
@@ -742,16 +780,21 @@ export const DataBank = ({mobile}) => {
                     <Modal.Content>
                         <Button 
                             positive 
-                            content="Yes" 
                             loading={loading}
-                            icon={delete_folder_check}
                             onClick={() => delete_folder(fold_id)}
-                        />
-                        <Button 
-                            negative 
-                            content="No" 
-                            onClick={() => dispatch({type: 'close'})}
-                        />
+                        >
+                            {
+                                delete_folder_check ? 
+                                <>
+                                    <Icon name="check"  />
+                                    Yes
+                                </>
+                                :
+                                <>
+                                    Yes
+                                </>
+                            }
+                        </Button>
                     </Modal.Content>
                 </Modal>
         </Segment>
