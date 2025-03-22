@@ -510,8 +510,8 @@ export const DataBank = ({mobile}) => {
                                                 </Grid> 
                                                 :
                                                 <Grid>
-                                                <Grid.Row verticalAlign="middle">  
-                                                    <Grid.Column width={8}>
+                                                <Grid.Row>  
+                                                    <Grid.Column>
                                                        
                                                         <Header as={mobile ? "h5" : "h4"}>
                                                             <Icon name="folder" color="green" /> 
@@ -520,21 +520,7 @@ export const DataBank = ({mobile}) => {
                                                             </Header.Content>
                                                         </Header>
                                                         
-                                                    </Grid.Column>
-                                                    <Grid.Column textAlign="right" width={8}>
-                                                        <Button 
-                                                            icon 
-                                                            basic 
-                                                            color="green" 
-                                                            size="ti" 
-                                                            onClick={() => navigate('/data_bank')}
-                                                        >
-                                                            <Icon color="green" name="refresh" />
-                                                            Reload
-                                                                
-                                                        </Button>
-                                                    </Grid.Column>
-                                                    
+                                                    </Grid.Column>            
                                                 </Grid.Row>
                                                 <Grid.Row columns={mobile ? 2 : 4}>
                                                     {folderList}
