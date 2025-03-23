@@ -2,6 +2,7 @@ import { useEffect, useReducer, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { Form, Button, Card, Container, Dropdown, Menu, Header, Grid, Icon, Modal, Segment, List, Divider } from "semantic-ui-react"
 import { useCreateFolderMutation, useDeleteFileMutation, useDeleteFolderMutation, useGetfoldersQuery, useGetUploadFiletoFolderQuery, useUploadFiletoFolderMutation } from "../features/api/apiSlice"
+import { getFileToFolder } from "../API"
 
 const initialState = {
     size: undefined,
@@ -38,6 +39,23 @@ function uploadReducer(state, action){
 
 export const DataBank = ({mobile}) => {
 
+    const [createfolder_open, setcreatefolder_open] = useState(false)
+    const [folder_files, setfolder_files] = useState([])
+    let fileToFolderList
+
+    useEffect(() => {
+        if(folder.length === 0){ 
+            setcreatefolder_open(true)
+        }
+        getfolder_file()
+
+    }, [folder_files])
+
+    const getfolder_file = () => {
+        getFileToFolder().get("/")
+        .then(res => setfolder_files(res.data))
+        .catch(error => console.log('An error has occurred ' + error))
+    }
     const navigate = useNavigate()
 
     const [state, dispatch] = useReducer(uploadReducer, initialState)
@@ -70,9 +88,6 @@ export const DataBank = ({mobile}) => {
     }
 
     const {data:folders, isSuccess, refetch} = useGetfoldersQuery()
-
-    const [createfolder_open, setcreatefolder_open] = useState(false)
-
 
     const [createFolder, {isLoading}] = useCreateFolderMutation()
     const saveFolder = [f_name].every(Boolean) && !isLoading
@@ -136,7 +151,7 @@ export const DataBank = ({mobile}) => {
         folder = folders.filter(f => f.f_owner === sessionStorage.getItem("email"))
         folderList = folder.map(f => (
                 <Grid.Column>
-                    <Card fluid style={{minWidth: 40}}>
+                    <Card fluid style={{border: 0}}>
                         <Card.Content>
                         <Dropdown simple style={{float: 'right'}}>
                             <Dropdown.Menu>
@@ -169,9 +184,9 @@ export const DataBank = ({mobile}) => {
        
     }
     
-    const {data:folder_files} = useGetUploadFiletoFolderQuery()
+    //const {data:folder_files} = useGetUploadFiletoFolderQuery()
+  
 
-    let fileToFolderList
     const [assets, setAssets] = useState(false)
 
     const open_folder = (folderId, foldername) => {
@@ -227,7 +242,10 @@ export const DataBank = ({mobile}) => {
         dispatch({type: 'open_delete_fold', size_delete_fold: "mini"})
     }
 
-    if(isSuccess){
+    let substr = "fl_attachment/"
+    let pos = 49
+
+    if(folder_files){
         const fileToFolder = folder_files.filter(f => f.folder_id === folder_id)
         fileToFolderList = fileToFolder.map(f => (
             <List.Item>
@@ -235,8 +253,12 @@ export const DataBank = ({mobile}) => {
                     <Dropdown simple icon="ellipsis vertical" style={{float: 'right'}}>
                         <Dropdown.Menu>
                             <Dropdown.Item text="Download" icon="save"
-                                onClick={() => saveFileBtn(f.id, f.uploaded_link)}
-                            />
+                                
+                            >
+                                <Link to={[f.uploaded_link.slice(0, pos), substr, f.uploaded_link.slice(pos)].join('')}>  
+                                        <Icon name="download" />download
+                                </Link>
+                            </Dropdown.Item>
                             <Dropdown.Item text="Delete" icon="trash"
                                 onClick={() => open_delete_btn(f.id, f.fileName)}
                             />
@@ -343,41 +365,6 @@ export const DataBank = ({mobile}) => {
         }
 
     }
-
-    let substr = "fl_attachment/"
-    const saveFileBtn = (id, link_text) => {
-        let file_string = link_text.substring(link_text.lastIndexOf(".")+1)
-        if(file_string === 'jpg'){
-            let pos = 49
-            window.open([link_text.slice(0, pos),substr, link_text.slice(pos)].join(''))
-        }else if(file_string === 'jpeg'){
-            let pos = 49
-            window.open([link_text.slice(0, pos),substr, link_text.slice(pos)].join(''))
-        }else if(file_string === 'txt'){
-            let pos = 47
-            window.open([link_text.slice(0, pos),substr, link_text.slice(pos)].join(''))
-        }else if(file_string === 'png'){
-            let pos = 49
-            window.open([link_text.slice(0, pos),substr, link_text.slice(pos)].join(''))
-        }else if(file_string === 'pdf'){
-            let pos = 49
-            window.open([link_text.slice(0, pos),substr, link_text.slice(pos)].join(''))
-        }
-       /*if(link_text.match("image")){
-            let pos = 49
-            window.open([link_text.slice(0, pos),substr, link_text.slice(pos)].join(''))
-       }else if(!link_text.match("image")){
-            let pos = 47
-            window.open([link_text.slice(0, pos),substr, link_text.slice(pos)].join(''))
-       }*/
-    }
-
-    useEffect(() => {
-        if(folder.length === 0){
-            setcreatefolder_open(true)
-        }
-    }, [])
-
 
     return(
         <Container>
@@ -525,6 +512,7 @@ export const DataBank = ({mobile}) => {
                                                 <Grid.Row columns={mobile ? 2 : 4}>
                                                     {folderList}
                                                 </Grid.Row>
+                                               
                                                 {
                                                     mobile ? 
                                                     <Grid.Row>
@@ -687,7 +675,6 @@ export const DataBank = ({mobile}) => {
                                 compact 
                                 content="Save"
                                 as="a" 
-                                onClick={saveFileBtn(file_id, file_link)}
                             />
                             
                             <Button 

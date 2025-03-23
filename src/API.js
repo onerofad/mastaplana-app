@@ -36,4 +36,16 @@ export function getAlarms(){
     )
 }
 
+export function getFileToFolder(){
+    return(
+        axios.create({
+            baseURL: "https://backend-app-pied.vercel.app/api/upload_file_to_folders",
+            headers: {
+                'Content-type': 'application/json',  
+                Accept: 'application/json' 
+            }
+        })
+    )
+}
+
 export const  mastaplana_file  =  '..//..//src//mastaplana_logo.jpg'
