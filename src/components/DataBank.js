@@ -294,7 +294,8 @@ export const DataBank = ({mobile}) => {
 
     let uploaded_link
     const [uploadFile] = useUploadFiletoFolderMutation()
-    const uploadSave = [folder_id, folder_name, folder_owner, fileName, fileSize, fileType, lastModifiedDate].every(Boolean) && !isLoading
+    //const uploadSave = [folder_id, folder_name, folder_owner, fileName, fileSize, fileType, lastModifiedDate].every(Boolean) && !isLoading
+    const uploadSave = [folder_id, folder_name, folder_owner].every(Boolean) && !isLoading
 
     const handlefileupload = (e) => {
         const f = e.target.files[0]
@@ -317,7 +318,7 @@ export const DataBank = ({mobile}) => {
                     data.append('file', file)
                     data.append("upload_preset", "slakw5ml");
                     data.append("cloud_name", "du3ck2joa");
-                    data.append("resource_type", "text")
+                    //data.append("resource_type", "text")
                     data.append("folder", "mastaplana/" + folder_name);
 
                     
