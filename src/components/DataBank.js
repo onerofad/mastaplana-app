@@ -46,6 +46,8 @@ export const DataBank = ({mobile}) => {
     useEffect(() => {
         if(folder.length === 0){ 
             setcreatefolder_open(true)
+        }else if(folder.length > 0){
+            setcreatefolder_open(false)
         }
         getfolder_file()
 
