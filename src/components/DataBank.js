@@ -38,7 +38,6 @@ function uploadReducer(state, action){
 
 export const DataBank = ({mobile}) => {
 
-   
     const navigate = useNavigate()
 
     const [state, dispatch] = useReducer(uploadReducer, initialState)
@@ -119,7 +118,7 @@ export const DataBank = ({mobile}) => {
 
     }
 
-    const [folder_id, setfolder_id] = useState()
+    const [folder_id, setfolder_id] = useState("")
     
     const [folder_name, setfolder_name] = useState("")
 
@@ -137,7 +136,7 @@ export const DataBank = ({mobile}) => {
         folder = folders.filter(f => f.f_owner === sessionStorage.getItem("email"))
         folderList = folder.map(f => (
                 <Grid.Column>
-                    <Card fluid>
+                    <Card fluid style={{minWidth: 40}}>
                         <Card.Content>
                         <Dropdown simple style={{float: 'right'}}>
                             <Dropdown.Menu>
@@ -639,7 +638,7 @@ export const DataBank = ({mobile}) => {
                                 />
                             </Form.Field>
                             <Button icon
-                                 onClick={uploadBtn} 
+                                 onClick={() => uploadBtn()} 
                                  color="green"
                                  loading={loading}
                             >
