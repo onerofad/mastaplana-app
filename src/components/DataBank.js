@@ -137,7 +137,7 @@ export const DataBank = ({mobile}) => {
         folder = folders.filter(f => f.f_owner === sessionStorage.getItem("email"))
         folderList = folder.map(f => (
                 <Grid.Column>
-                    <Card fluid>
+                    <Card>
                         <Card.Content>
                         <Dropdown simple style={{float: 'right'}}>
                             <Dropdown.Menu>
