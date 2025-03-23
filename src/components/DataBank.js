@@ -252,11 +252,9 @@ export const DataBank = ({mobile}) => {
                 <List.Content floated="right">
                     <Dropdown simple icon="ellipsis vertical" style={{float: 'right'}}>
                         <Dropdown.Menu>
-                            <Dropdown.Item text="Download" icon="save"
-                                
-                            >
-                                <Link to={[f.uploaded_link.slice(0, pos), substr, f.uploaded_link.slice(pos)].join('')}>  
-                                        <Icon name="download" />download
+                            <Dropdown.Item>
+                                <Link style={{color: '#000'}} to={[f.uploaded_link.slice(0, pos), substr, f.uploaded_link.slice(pos)].join('')}>  
+                                        <Icon name="download" />Download
                                 </Link>
                             </Dropdown.Item>
                             <Dropdown.Item text="Delete" icon="trash"
@@ -630,6 +628,7 @@ export const DataBank = ({mobile}) => {
                                  onClick={() => uploadBtn()} 
                                  color="green"
                                  loading={loading}
+                                 size="larger"
                             >
                                 {
                                     (check ?
