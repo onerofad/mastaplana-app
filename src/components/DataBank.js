@@ -46,9 +46,9 @@ export const DataBank = ({mobile}) => {
     useEffect(() => {
         if(folder.length === 0){ 
             setcreatefolder_open(true)
-        }else if(folder.length > 0){
+        }/*else if(folder.length > 0){
             setcreatefolder_open(false)
-        }
+        }*/
         getfolder_file()
 
     }, [folder_files])
@@ -152,7 +152,6 @@ export const DataBank = ({mobile}) => {
     if(isSuccess){
         folder = folders.filter(f => f.f_owner === sessionStorage.getItem("email"))
         folderList = folder.map(f => (
-                <Grid.Column>
                     <Card>
                         <Card.Content>
                         <Dropdown simple style={{float: 'right'}}>
@@ -180,8 +179,7 @@ export const DataBank = ({mobile}) => {
                             </Header>
                         </Card.Content>
                     </Card>
-                    <br/>
-                </Grid.Column>
+            
         ))
        
     }
@@ -509,8 +507,10 @@ export const DataBank = ({mobile}) => {
                                                         
                                                     </Grid.Column>            
                                                 </Grid.Row>
-                                                <Grid.Row columns={mobile ? 2 : 4}>
-                                                    {folderList}
+                                                <Grid.Row>
+                                                    <Card.Group itemsPerRow={mobile ? 2 : 4}>
+                                                        {folderList}
+                                                    </Card.Group>
                                                 </Grid.Row>
                                                
                                                 {
