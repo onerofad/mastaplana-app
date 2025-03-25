@@ -44,9 +44,7 @@ export const DataBank = ({mobile}) => {
     let fileToFolderList
 
     useEffect(() => {
-        if(folder.length > 0){ 
-            setcreatefolder_open(false)
-        }/*else if(folder.length > 0){
+        /*{folder.length > 0 &&
             setcreatefolder_open(false)
         }*/
         getfolder_file()
