@@ -29,20 +29,20 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
         const [value13, setValue13] = useState("")
         const [value14, setValue14] = useState("")
 
-        const [value21, setValue21] = useState("data")
-        const [value22, setValue22] = useState("data")
-        const [value23, setValue23] = useState("data")
-        const [value24, setValue24] = useState("data")
+        const [value21, setValue21] = useState("...")
+        const [value22, setValue22] = useState("...")
+        const [value23, setValue23] = useState("...")
+        const [value24, setValue24] = useState("...")
 
-        const [value31, setValue31] = useState("data")
-        const [value32, setValue32] = useState("data")
-        const [value33, setValue33] = useState("data")
-        const [value34, setValue34] = useState("data")
+        const [value31, setValue31] = useState("...")
+        const [value32, setValue32] = useState("...")
+        const [value33, setValue33] = useState("...")
+        const [value34, setValue34] = useState("...")
 
-        const [value41, setValue41] = useState("data")
-        const [value42, setValue42] = useState("data")
-        const [value43, setValue43] = useState("data")
-        const [value44, setValue44] = useState("data")
+        const [value41, setValue41] = useState("...")
+        const [value42, setValue42] = useState("...")
+        const [value43, setValue43] = useState("...")
+        const [value44, setValue44] = useState("...")
 
         const [sendData, {isLoading}] = useTabularDataMutation()
 
@@ -79,7 +79,8 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
         if(isSuccess){
             const table = tables.filter(t => t.emailId === sessionStorage.getItem("email"))
             tableList = table.map(t => (
-                <Card fluid raised>
+                <Grid.Column mobile={16} computer={8}>
+                <Card fluid raised link={true}>
                     <Card.Header>
                         {t.title}
                     </Card.Header>
@@ -118,6 +119,8 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
                         </Table>
                     </Card.Content>
                 </Card>
+                <br/>
+                </Grid.Column>
             ))
         }
         {/*if(isSuccess){
@@ -367,14 +370,10 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
                                     <Segment style={{}}>
                                         <Grid container>
                                             <Grid.Row>
-                                                <Card.Group itemsPerRow={2} >
-                                                    {tableList}
-                                                </Card.Group>
+                                                {tableList}          
                                             </Grid.Row>
                                         </Grid>
-                                        
                                     </Segment>
-                                    
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>
