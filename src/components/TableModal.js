@@ -368,7 +368,7 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
                                             {tableList}
                                         </List>*/}
                                     <Segment style={{}}>
-                                        <Grid container>
+                                        <Grid>
                                             <Grid.Row>
                                                 {tableList}          
                                             </Grid.Row>
