@@ -452,19 +452,19 @@ const Document = ({mobile}) => {
                                                         </Button>
                                                     </Grid.Column>
                                                 </Grid.Row>
-                                                {/*<Grid.Row>
+                                                <Grid.Row>
                                                 <Grid.Column>
                                                         <Button 
                                                             fluid 
                                                             size="large" 
                                                             color="green"
-                                                            onClick={() => dispatch({type: 'open_table', size_table: 'small'})}
+                                                            onClick={() => dispatch({type: 'open_table', size_table: 'large'})}
 
                                                         >
                                                             Save Tabular Data
                                                         </Button>
                                                     </Grid.Column>
-                                                </Grid.Row>*/}
+                                                </Grid.Row>
                                             </Grid>
                                             
                                         </Grid.Column>
