@@ -218,6 +218,13 @@ export const apiSlice = createApi({
                 method: 'DELETE'
             })
         }),
+        editTable: builder.mutation({
+            query: item => ({
+                url: `/table_data/${item.id}/`,
+                method: 'PATCH',
+                body: item
+            })
+        }),
 
     })
     
@@ -242,5 +249,5 @@ export const {
     useUploadFiletoFolderMutation, useGetUploadFiletoFolderQuery,
     useDeleteFileMutation, useDeleteFolderMutation,
     useSubmitMessageMutation,
-    useTabularDataMutation, useGetTablesQuery, useDeleteTableMutation
+    useTabularDataMutation, useGetTablesQuery, useDeleteTableMutation, useEditTableMutation
 } = apiSlice

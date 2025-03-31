@@ -1,10 +1,14 @@
 import { useState, useEffect, useReducer } from "react"
-import { Modal, Grid, Input, Icon, Table, Header, Button, Dropdown, List, Segment, Card } from "semantic-ui-react"
-import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from "../features/api/apiSlice"
+import { Modal, Grid, Input, Icon, Table, Header, Button, Dropdown, List, Segment, Card, TableHeader } from "semantic-ui-react"
+import {useDeleteTableMutation, useEditTableMutation, useGetTablesQuery, useTabularDataMutation} from "../features/api/apiSlice"
 
     const TableModal = ({openModalTable, sizeModalTable, closeModal}) => {
         
         const [msg, setmsg] = useState("")
+
+        const [id, setId] = useState("")
+
+        const [edit_table, setedit_table] = useState(false)
 
         const [title, setTitle] = useState("")
 
@@ -29,20 +33,20 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
         const [value13, setValue13] = useState("")
         const [value14, setValue14] = useState("")
 
-        const [value21, setValue21] = useState("...")
-        const [value22, setValue22] = useState("...")
-        const [value23, setValue23] = useState("...")
-        const [value24, setValue24] = useState("...")
+        const [value21, setValue21] = useState("-")
+        const [value22, setValue22] = useState("-")
+        const [value23, setValue23] = useState("-")
+        const [value24, setValue24] = useState("-")
 
-        const [value31, setValue31] = useState("...")
-        const [value32, setValue32] = useState("...")
-        const [value33, setValue33] = useState("...")
-        const [value34, setValue34] = useState("...")
+        const [value31, setValue31] = useState("-")
+        const [value32, setValue32] = useState("-")
+        const [value33, setValue33] = useState("-")
+        const [value34, setValue34] = useState("-")
 
-        const [value41, setValue41] = useState("...")
-        const [value42, setValue42] = useState("...")
-        const [value43, setValue43] = useState("...")
-        const [value44, setValue44] = useState("...")
+        const [value41, setValue41] = useState("-")
+        const [value42, setValue42] = useState("-")
+        const [value43, setValue43] = useState("-")
+        const [value44, setValue44] = useState("-")
 
         const [sendData, {isLoading}] = useTabularDataMutation()
 
@@ -80,7 +84,7 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
             const table = tables.filter(t => t.emailId === sessionStorage.getItem("email"))
             tableList = table.map(t => (
                 <Grid.Column mobile={16} computer={8}>
-                <Card fluid raised link={true}>
+                <Card onClick={() => editTable(t.id)} fluid raised link={true}>
                     <Card.Header>
                         {t.title}
                     </Card.Header>
@@ -123,36 +127,100 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
                 </Grid.Column>
             ))
         }
-        {/*if(isSuccess){
-                const table = tables.filter(t => t.emailId === sessionStorage.getItem("email"))
-                tableList = table.map(t => (
-                    <List.Item>
-                        <List.Content floated="right">
-                            <Dropdown simple icon="ellipsis vertical" style={{float: 'right'}}>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item text="open" icon="save"
-                                        onClick={() => openTable()}
-                                    />
-                                    <Dropdown.Item text="Delete" icon="trash"
-                                        onClick={() => deleteTable(t.id)}
-                                    />
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </List.Content>
-                        <List.Icon name="file" size="large" verticalAlign="middle" color="green" />
-                        {
-                            (t.title.length <= 18) ?
-                                <List.Content>
-                                    <List.Header>{t.title}</List.Header>
-                                </List.Content>
-                            :
-                                <List.Content>
-                                    <List.Header>{t.title.substr(0, 18)}...</List.Header>
-                                </List.Content>
-                        }
-                    </List.Item>   
-                ))
-            }*/}
+        
+        const editTable = (id) => {
+            const tableData = tables.filter(t => t.id === id)[0]
+                if(tableData){
+                    setId(id)
+                    
+                    setedit_table(true)
+
+                    setTitle(tableData.title)
+
+                    sethead1(tableData.head1)
+                    sethead2(tableData.head2)
+                    sethead3(tableData.head3)
+                    sethead4(tableData.head4)
+
+                    setValue11(tableData.value11)
+                    setValue12(tableData.value12)
+                    setValue13(tableData.value13)
+                    setValue14(tableData.value14)
+
+                    setValue21(tableData.value21)
+                    setValue22(tableData.value22)
+                    setValue23(tableData.value23)
+                    setValue24(tableData.value24)
+
+                    setValue31(tableData.value31)
+                    setValue32(tableData.value32)
+                    setValue33(tableData.value33)
+                    setValue34(tableData.value34)
+
+                    setValue41(tableData.value41)
+                    setValue42(tableData.value42)
+                    setValue43(tableData.value43)
+                    setValue44(tableData.value44)
+                }
+            }
+
+        const [editData] = useEditTableMutation()
+
+        const updateData = [title, emailId, head1, head2, head3, head4, value11, value12, value13, value14].every(Boolean) && !isLoading
+    
+        const updateTable = async () => {
+            if(title === '' ||  head1 ==='' ||  head2 === '' || head3 === '' || head4 === '' || value11 === '' || value12 === '' || value13 === '' || value14 === ''){
+                setmsg("Please enter Table Name, headers and at least a row")
+            }else{
+                if(updateData){
+                    try{
+                        setloading(true)
+                        await editData({id: id,
+                            title, emailId,
+                            head1, head2, head3, head4,
+                            value11, value12, value13, value14,
+                            value21, value22, value23, value24,
+                            value31, value32, value33, value34,
+                            value41, value42, value43, value44
+                        }).unwrap()
+                        setloading(false)
+                        setedit_table(false)
+
+                        setTitle("")
+
+                        sethead1("Head-1")
+                        sethead2("Head-2")
+                        sethead3("Head-3")
+                        sethead4("Head-4")
+
+                        setValue11("")
+                        setValue12("")
+                        setValue13("")
+                        setValue14("")
+
+                        setValue21("-")
+                        setValue22("-")
+                        setValue23("-")
+                        setValue24("-")
+
+                        setValue31("-")
+                        setValue32("-")
+                        setValue33("-")
+                        setValue34("-")
+
+                        setValue41("-")
+                        setValue42("-")
+                        setValue43("-")
+                        setValue44("-")
+
+                        refetch()
+                    }catch(error){
+                        console.log('An error has occurred' + error)
+                    }
+                }
+            }
+
+        }
 
         const openTable = () => {
 
@@ -235,24 +303,28 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
                                                     <Input 
                                                         onChange={(e) => setValue11(e.target.value)}
                                                         transparent
+                                                        value={value11}
                                                     />
                                                 </Table.Cell>
                                                 <Table.Cell>
                                                     <Input 
                                                         onChange={(e) => setValue12(e.target.value)}
                                                         transparent
+                                                        value={value12}
                                                     />
                                                 </Table.Cell>
                                                 <Table.Cell>
                                                     <Input 
                                                         onChange={(e) => setValue13(e.target.value)}
                                                         transparent
+                                                        value={value13}
                                                     /> 
                                                 </Table.Cell>
                                                 <Table.Cell>
                                                     <Input 
                                                         onChange={(e) => setValue14(e.target.value)}
                                                         transparent
+                                                        value={value14}
                                                     />
                                                 </Table.Cell>
                                             </Table.Row>
@@ -261,24 +333,28 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
                                                     <Input 
                                                         onChange={(e) => setValue21(e.target.value)}
                                                         transparent
+                                                        value={value21}
                                                     />
                                                 </Table.Cell>
                                                 <Table.Cell>
                                                     <Input 
                                                         onChange={(e) => setValue22(e.target.value)}
                                                         transparent
+                                                        value={value22}
                                                     />
                                                 </Table.Cell>
                                                 <Table.Cell>
                                                     <Input 
                                                         onChange={(e) => setValue23(e.target.value)}
                                                         transparent
+                                                        value={value23}
                                                     /> 
                                                 </Table.Cell>
                                                 <Table.Cell>
                                                     <Input 
                                                         onChange={(e) => setValue24(e.target.value)}
                                                         transparent
+                                                        value={value24}
                                                     />
                                                 </Table.Cell>
                                             </Table.Row>
@@ -287,24 +363,28 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
                                                     <Input 
                                                         onChange={(e) => setValue31(e.target.value)}
                                                         transparent
+                                                        value={value31}
                                                     />
                                                 </Table.Cell>
                                                 <Table.Cell>
                                                     <Input 
                                                         onChange={(e) => setValue32(e.target.value)}
                                                         transparent
+                                                        value={value32}
                                                     />
                                                 </Table.Cell>
                                                 <Table.Cell>
                                                     <Input 
                                                         onChange={(e) => setValue33(e.target.value)}
                                                         transparent
+                                                        value={value33}
                                                     /> 
                                                 </Table.Cell>
                                                 <Table.Cell>
                                                     <Input 
                                                         onChange={(e) => setValue34(e.target.value)}
                                                         transparent
+                                                        value={value34}
                                                     />
                                                 </Table.Cell>
                                             </Table.Row>
@@ -313,24 +393,28 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
                                                     <Input 
                                                         onChange={(e) => setValue41(e.target.value)}
                                                         transparent
+                                                        value={value41}
                                                     />
                                                 </Table.Cell>
                                                 <Table.Cell>
                                                     <Input 
                                                         onChange={(e) => setValue42(e.target.value)}
                                                         transparent
+                                                        value={value42}
                                                     />
                                                 </Table.Cell>
                                                 <Table.Cell>
                                                     <Input 
                                                         onChange={(e) => setValue43(e.target.value)}
                                                         transparent
+                                                        value={value43}
                                                     /> 
                                                 </Table.Cell>
                                                 <Table.Cell>
                                                     <Input 
                                                         onChange={(e) => setValue44(e.target.value)}
                                                         transparent
+                                                        value={value44}
                                                     />
                                                 </Table.Cell>
                                             </Table.Row>
@@ -338,7 +422,18 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
                                     </Table>             
                                     </div>
                                     <br/>
-                               
+                                    {
+                                    (edit_table ? 
+                                    <Button
+                                        color="green"
+                                        size="large"
+                                        loading={loading}
+                                        onClick={() => updateTable()}
+                                        icon
+                                    >
+                                        Edit Data
+                                    </Button>
+                                    :
                                     <Button 
                                         color="green" 
                                         size="large"
@@ -359,6 +454,8 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
                                             )
                                         }
                                     </Button>
+                                    )
+                                    }
                                     <span style={{color: 'red'}}>{msg}</span>
                                    
                                    </Grid.Column>
@@ -367,7 +464,7 @@ import {useDeleteTableMutation, useGetTablesQuery, useTabularDataMutation} from 
                                         <List selection relaxed="very" divided verticalAlign="middle">
                                             {tableList}
                                         </List>*/}
-                                    <Segment style={{}}>
+                                    <Segment style={{height: 300, overflowY: 'auto'}}>
                                         <Grid>
                                             <Grid.Row>
                                                 {tableList}          
