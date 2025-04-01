@@ -19,6 +19,7 @@ import { useRemoveAlarmMutation } from './features/api/apiSlice';
 import { DataBank } from './components/DataBank';
 import { Support } from './components/Support';
 import { SendFile } from './components/SendFile';
+import ForgotPassword from './components/ForgotPassword.';
 
 const { MediaContextProvider, Media } = createMedia({
     breakpoints: {
@@ -149,6 +150,7 @@ const App = () => {
             <Route path='/data_bank' element={<DataBank mobile />}  />
             <Route path='/support' element={<Support mobile />}  />
             <Route path='/send_file' element={<SendFile mobile />}  />
+            <Route path='/forgotpassword' element={<ForgotPassword mobile />}  />
 
           </Routes>
         </BrowserRouter>
@@ -172,6 +174,7 @@ const App = () => {
             <Route path='/data_bank' element={<DataBank />}  />
             <Route path='/support' element={<Support />}  />
             <Route path='/send_file' element={<SendFile />}  />
+            <Route path='/forgotpassword' element={<ForgotPassword  />}  />
 
 
 
