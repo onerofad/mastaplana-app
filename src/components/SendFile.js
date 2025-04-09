@@ -256,7 +256,7 @@ export const SendFile = ({mobile}) => {
                                                                 error={emailError}
                                                                 onChange={handleEmail}
                                                                 onClick={() => setemailError(false)}
-                                                                placeholder="Your Recepient Email"
+                                                                placeholder="Recepient Email"
                                                             />
                                                         </Form.Field>
                                                         <Form.Field>
@@ -266,7 +266,7 @@ export const SendFile = ({mobile}) => {
                                                                 error={emailError1}
                                                                 onChange={handleEmail1}
                                                                 onClick={() => setemailError1(false)}
-                                                                placeholder="Your Sender Email"
+                                                                placeholder="Sender Email"
                                                             />
                                                         </Form.Field>
                                                     </Form>

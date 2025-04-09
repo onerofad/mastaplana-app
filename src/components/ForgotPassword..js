@@ -5,16 +5,19 @@ import { Grid, Header, Segment, Button, Container, Form, Image, Icon } from "sem
 const ForgotPassword = ({mobile}) => {
 
     const [email, setemail] = useState("")
+    const [emailError, setemailerror] = useState(false)
     
     const navigate = useNavigate()
 
     const handleEmail = (e) => setemail(e.target.value)
    
 
-    const loginBtn = () => {
+    const forgotBtn = () => {
 
         if(email === ''){
+            setemailerror({content: 'Email field is empty', pointing: 'below'})
         }else{
+            alert("Hello")
         }
         
     }
@@ -36,13 +39,16 @@ const ForgotPassword = ({mobile}) => {
                                 <Form.Field>
                                     <Form.Input placeholder="Email Address" 
                                         value={email}
+                                        error={emailError}
+                                        onChange={handleEmail}
+                                        onClick={() => setemailerror(false)}
                                     />
                                 </Form.Field>
                                 <Form.Field>
                                 <Button
                                     size="large"
                                     style={{ color: '#fff', backgroundColor: "#3E72C0"}}
-                                    onClick={() => loginBtn()}
+                                    onClick={() => forgotBtn()}
                                 >
                                     SEND
                                 </Button>

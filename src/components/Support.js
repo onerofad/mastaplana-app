@@ -8,7 +8,7 @@ export const Support = ({mobile}) => {
     
     const navigate = useNavigate()
 
-    const [email, setemail] = useState("")
+    const [email, setemail] = useState(sessionStorage.getItem("email"))
     const [emailError, setemailError] = useState(false)
 
     const [check, setcheck] = useState("")
@@ -18,9 +18,9 @@ export const Support = ({mobile}) => {
 
     const [loading, setLoading] = useState(false)
 
-    const handleEmail = (e) => {
+    /*const handleEmail = (e) => {
         setemail(e.target.value)
-    }
+    }*/
 
     const handleMessage = (e) => {
         setmessage(e.target.value)
@@ -45,7 +45,7 @@ export const Support = ({mobile}) => {
                             message: message,
                                 to_email: 'imafidonfrank2015@gmail.com',
                             },  {publicKey: 'A3D4HSPHNJ8f_odij'});
-                            setemail('')
+                            //setemail('')
                             setmessage('')
                             setLoading(false)
                             setcheck("check")
@@ -118,7 +118,7 @@ export const Support = ({mobile}) => {
                                         <Grid textAlign="center" verticalAlign="middle" style={{height: mobile ? '75vh' : '100vh'}}>
                                             <Grid.Row>
                                                 <Grid.Column style={{ maxWidth: 450}}>
-                                                    <Message>
+                                                    <Message color="green">
                                                         <Message.Header>
                                                             Support Center
                                                         </Message.Header>
@@ -132,10 +132,9 @@ export const Support = ({mobile}) => {
                                                     <Form size="big">
                                                         <Form.Field>
                                                             <Form.Input
-                                                                placeholder="Your Email"
                                                                 value={email}
                                                                 error={emailError}
-                                                                onChange={handleEmail}
+                                                                //onChange={handleEmail}
                                                                 onClick={() => setemailError(false)}
                                                             />
                                                         </Form.Field>

@@ -20,6 +20,7 @@ import { DataBank } from './components/DataBank';
 import { Support } from './components/Support';
 import { SendFile } from './components/SendFile';
 import ForgotPassword from './components/ForgotPassword.';
+import ResetPassword from './components/ResetPassword';
 
 const { MediaContextProvider, Media } = createMedia({
     breakpoints: {
@@ -151,6 +152,7 @@ const App = () => {
             <Route path='/support' element={<Support mobile />}  />
             <Route path='/send_file' element={<SendFile mobile />}  />
             <Route path='/forgotpassword' element={<ForgotPassword mobile />}  />
+            <Route path='/resetpassword' element={<ResetPassword mobile />}  />
 
           </Routes>
         </BrowserRouter>
@@ -175,8 +177,7 @@ const App = () => {
             <Route path='/support' element={<Support />}  />
             <Route path='/send_file' element={<SendFile />}  />
             <Route path='/forgotpassword' element={<ForgotPassword  />}  />
-
-
+            <Route path='/resetpassword' element={<ResetPassword  />}  />
 
           </Routes>
         </BrowserRouter>
