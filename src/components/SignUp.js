@@ -80,11 +80,11 @@ const SignUp = ({mobile}) => {
                 if(saveuser){
                     try{
                         await insertUser({fname, mname, lname, phone, email, password}).unwrap()
-                        emailjs.send("service_k0d80hp","template_uap3dit",{
+                        emailjs.send("service_xb23hnw","template_ym6f2ho",{
                             to_name: fname,
                             message: `https://mastaplana-app.vercel.app/verifyemail/${email}`,
                             to_email: email,
-                        },  {publicKey: 'A3D4HSPHNJ8f_odij'});
+                        },  {publicKey: 'ksmb9LVXc2VEPulHb'});
                         setfname('')
                         setmname('')
                         setlname('')
