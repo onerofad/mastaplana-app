@@ -129,13 +129,6 @@ const ResetPassword = ({mobile}) => {
                     >
                         <Modal.Header>
                             Password Reset
-                            <Icon 
-                                onClick={() => dispatch({type: 'close'})} 
-                                name="close" 
-                                size="small" 
-                                style={{ float: 'right'}} 
-                                link={true}
-                            />
                         </Modal.Header>
                         <Modal.Content>
                             <Header icon textAlign="center" as="h4">
