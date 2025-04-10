@@ -65,6 +65,8 @@ const ResetPassword = ({mobile}) => {
             setpasswordError({content: 'Password field is empty', pointing: 'below'})
         }else if(resetpassword === ''){
             setresetpasswordError({content: 'Reset Password field is empty', pointing: 'below'})
+        }else if(password !== resetpassword){
+            setresetpasswordError({content: 'Password do not match', pointing: 'below'})
         }else{
             if(savePassword){
                 setloading(true)
