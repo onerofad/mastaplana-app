@@ -152,7 +152,7 @@ const App = () => {
             <Route path='/support' element={<Support mobile />}  />
             <Route path='/send_file' element={<SendFile mobile />}  />
             <Route path='/forgotpassword' element={<ForgotPassword mobile />}  />
-            <Route path='/resetpassword' element={<ResetPassword mobile />}  />
+            <Route path='/resetpassword/:email' element={<ResetPassword mobile />}  />
 
           </Routes>
         </BrowserRouter>
@@ -177,7 +177,7 @@ const App = () => {
             <Route path='/support' element={<Support />}  />
             <Route path='/send_file' element={<SendFile />}  />
             <Route path='/forgotpassword' element={<ForgotPassword  />}  />
-            <Route path='/resetpassword' element={<ResetPassword  />}  />
+            <Route path='/resetpassword/:email' element={<ResetPassword  />}  />
 
           </Routes>
         </BrowserRouter>

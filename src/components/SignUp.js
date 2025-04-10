@@ -36,7 +36,7 @@ const SignUp = ({mobile}) => {
     const [lname, setlname] = useState('')
     const [email, setemail] = useState('')
     const [phone, setphone] = useState('')
-    const [password, setpassword] =useState('')
+    const [password, setpassword] = useState('')
 
     const [fnameError, setfnameError] = useState(false)
     const [mnameError, setmnameError] = useState(false)
