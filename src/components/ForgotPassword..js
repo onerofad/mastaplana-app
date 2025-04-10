@@ -54,9 +54,9 @@ const ForgotPassword = ({mobile}) => {
                         message: `https://mastaplana-app.vercel.app/resetpassword/${email}`,
                         to_email: email,
                     },  {publicKey: '76FU_4OL25685iLZx'});
-    
                     dispatch({type: 'open', size: 'mini'})
-
+                    setemail("")
+                    setloading(false)
                 },[3000])
                
             }

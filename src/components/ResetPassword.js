@@ -36,12 +36,9 @@ const ResetPassword = ({mobile}) => {
 
     const {data: users, isSuccess} = useGetUsersQuery()
 
+    let user
     if(isSuccess){
-        const user = users.filter(u => u.email === emailId)[0]
-        if(user){
-            setId(user.id)
-        }
-
+         user = users.filter(u => u.email === emailId)[0]
     }
 
     const [password, setpassword] = useState("")
@@ -59,7 +56,7 @@ const ResetPassword = ({mobile}) => {
    
     const [updatePassword, {isLoading}] = useChangePasswordMutation()
 
-    const savePassword = [user_id, password].every(Boolean) && !isLoading
+    const savePassword = [password].every(Boolean) && !isLoading
 
 
     const resetBtn = async () => {
@@ -72,7 +69,7 @@ const ResetPassword = ({mobile}) => {
             if(savePassword){
                 setloading(true)
                 try{
-                    await updatePassword({id: user_id, password}).unwrap()
+                    await updatePassword({id: user.id, password}).unwrap()
                     setloading(false)
                     dispatch({type: 'open', size: "mini"})
                 }catch(error){
