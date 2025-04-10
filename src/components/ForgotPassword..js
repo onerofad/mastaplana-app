@@ -58,7 +58,6 @@ const ForgotPassword = ({mobile}) => {
                     dispatch({type: 'open', size: 'mini'})
 
                 },[3000])
-                setloading(false)
                
             }
         }
@@ -90,6 +89,7 @@ const ForgotPassword = ({mobile}) => {
                                 <Form.Field>
                                 <Button
                                     size="large"
+                                    loading={loading}
                                     style={{ color: '#fff', backgroundColor: "#3E72C0"}}
                                     onClick={() => forgotBtn()}
                                 >
@@ -118,11 +118,15 @@ const ForgotPassword = ({mobile}) => {
                             />
                         </Modal.Header>
                         <Modal.Content>
-                            <Header textAlign="center" as="h4">
-                                <Icon circular inverted name="check" color="green" />
-                                <Header.Subheader>
-                                    Visit your email to Reset your password
-                                </Header.Subheader>
+                            <Header icon textAlign="center" as="h4">
+                                <Icon 
+                                    size="large" 
+                                    circular 
+                                    inverted 
+                                    name="check" 
+                                    color="green" 
+                                />
+                                Visit your email to Reset your password
                             </Header>
                         </Modal.Content>
                     </Modal>             

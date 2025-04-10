@@ -225,6 +225,13 @@ export const apiSlice = createApi({
                 body: item
             })
         }),
+        changePassword: builder.mutation({
+            query: item => ({
+                url: `/users/${item.id}/`,
+                method: 'PATCH',
+                body: item
+            })
+        }),
 
     })
     
@@ -249,5 +256,7 @@ export const {
     useUploadFiletoFolderMutation, useGetUploadFiletoFolderQuery,
     useDeleteFileMutation, useDeleteFolderMutation,
     useSubmitMessageMutation,
-    useTabularDataMutation, useGetTablesQuery, useDeleteTableMutation, useEditTableMutation
+    useTabularDataMutation, useGetTablesQuery, useDeleteTableMutation, useEditTableMutation,
+    useChangePasswordMutation
+    
 } = apiSlice
