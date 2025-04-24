@@ -1,6 +1,7 @@
 import { Grid, Segment, Container, Icon, Header, Form, Button, Message, Modal, List } from "semantic-ui-react"
 import { Link, useNavigate } from "react-router-dom"
 import React, { useReducer, useState } from "react"
+import emailjs from '@emailjs/browser'
 
 import { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
@@ -115,6 +116,8 @@ function UploadDropzone({onDrop}){
 
 export const SendFile = ({mobile}) => {
 
+    let uploaded_file
+
     const [state, dispatch] = useReducer(dropReducer, initialState)
 
     const navigate = useNavigate()
@@ -164,6 +167,7 @@ export const SendFile = ({mobile}) => {
             dispatch({type: 'open_error', size_error: "mini"})
         }else{
         setLoading(true)
+        let fileURL
         const uploadedImages = []
         const cloudName = "du3ck2joa"
         for(const file of imgFiles){
@@ -184,6 +188,16 @@ export const SendFile = ({mobile}) => {
 
                      const data = await response.json()
                      uploadedImages.push(data.secure_url)
+
+                     fileURL = data.url.toString()
+                     uploaded_file = fileURL
+                      emailjs.send("service_wo28vkf","template_2odlhkh",{
+                        message: `${uploaded_file}`,
+                        to_email: email,
+                        from_email: email1
+                    },  {publicKey: '76FU_4OL25685iLZx'});
+
+
                      setLoading(false)
                      dispatch({type: 'open', size: "mini"})
                      setEmail("")

@@ -44,7 +44,7 @@ export const Support = ({mobile}) => {
                         to_name: 'mastaplana',
                             message: message,
                             from_email: email,
-                            to_email: 'imafidonfrank2015@gmail.com',
+                            to_email: 'mastaplana005@gmail.com',
                         },  {publicKey: '76FU_4OL25685iLZx'});
                         //setemail('')
                             setmessage('')
