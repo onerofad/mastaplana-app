@@ -192,12 +192,12 @@ const Photos = ({mobile}) => {
                       //alert(imageURL)
                       uploaded_file = imageURL
                       //setUrl(res.url.toString());
-                      emailjs.send("service_k0d80hp","template_mp8ld0f",{
+                      emailjs.send("service_wo28vkf","template_2odlhkh",{
                         to_name: usertype,
                         message: `${uploaded_file}`,
                         to_email: usertype,
                         from_email: filesender
-                    },  {publicKey: 'A3D4HSPHNJ8f_odij'});
+                    },  {publicKey: '76FU_4OL25685iLZx'});
                    
                       //await uploadFile({fileowner, uploaded_file, filesender}).unwrap()
                       //setfileowner('')

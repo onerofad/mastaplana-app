@@ -118,12 +118,12 @@ import emailjs from '@emailjs/browser'
                         const res = await response.json();
                         fileURL = res.url.toString()
                         uploaded_pdf = fileURL
-                        emailjs.send("service_k0d80hp","template_mp8ld0f",{
+                        emailjs.send("service_wo28vkf","template_2odlhkh",{
                             to_name: usertype,
                             message: `${uploaded_pdf}`,
                             to_email: usertype,
                             from_email: filesender
-                        },  {publicKey: 'A3D4HSPHNJ8f_odij'});
+                        },  {publicKey: '76FU_4OL25685iLZx'});
                         
                             //await uploadFile({fileowner, uploaded_pdf, filesender}).unwrap()
                             //setfileowner("")

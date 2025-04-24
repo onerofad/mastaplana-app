@@ -176,12 +176,12 @@ const Video = ({mobile}) => {
                       const res = await response.json();
                       videoURL = res.url.toString()
                       uploaded_video = videoURL
-                      emailjs.send("service_k0d80hp","template_mp8ld0f",{
+                      emailjs.send("service_wo28vkf","template_2odlhkh",{
                         to_name: usertype,
                         message: `${uploaded_video}`,
                         to_email: usertype,
                         from_email: filesender
-                    },  {publicKey: 'A3D4HSPHNJ8f_odij'});
+                    },  {publicKey: '76FU_4OL25685iLZx'});
                     //await uploadVideo({fileowner, uploaded_video, filesender}).unwrap()
                       setloading(false)
                       dispatch({type: 'open', size: 'mini'})

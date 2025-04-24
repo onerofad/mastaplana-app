@@ -117,12 +117,12 @@ import { current } from "@reduxjs/toolkit"
                             uploaded_text = fileURL
 
                                 //await uploadFile({fileowner, uploaded_text, filesender}).unwrap()
-                                emailjs.send("service_k0d80hp","template_mp8ld0f",{
+                                emailjs.send("service_wo28vkf","template_2odlhkh",{
                                     to_name: usertype,
                                     message: `${uploaded_text}`,
                                     to_email: usertype,
                                     from_email: filesender
-                                },  {publicKey: 'A3D4HSPHNJ8f_odij'});
+                                },  {publicKey: '76FU_4OL25685iLZx'});
                                 //setfileowner("")
                                 setmsg("File sent")
                                 setFile(null)
