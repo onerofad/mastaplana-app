@@ -40,7 +40,7 @@ export const Support = ({mobile}) => {
                 try{
                     setLoading(true)
                     await submitMessage({email, message}).unwrap()
-                    emailjs.send("service_wo28vkf","template_2odlhkh",{
+                    emailjs.send("service_wo28vkf","template_u8pr4fk",{
                         to_name: 'mastaplana',
                             message: message,
                             from_email: email,
