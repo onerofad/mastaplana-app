@@ -40,12 +40,13 @@ export const Support = ({mobile}) => {
                 try{
                     setLoading(true)
                     await submitMessage({email, message}).unwrap()
-                    emailjs.send("service_k0d80hp","template_uap3dit",{
-                            to_name: 'mastaplana',
+                    emailjs.send("service_wo28vkf","template_2odlhkh",{
+                        to_name: 'mastaplana',
                             message: message,
-                                to_email: 'imafidonfrank2015@gmail.com',
-                            },  {publicKey: 'A3D4HSPHNJ8f_odij'});
-                            //setemail('')
+                            from_email: email,
+                            to_email: 'imafidonfrank2015@gmail.com',
+                        },  {publicKey: '76FU_4OL25685iLZx'});
+                        //setemail('')
                             setmessage('')
                             setLoading(false)
                             setcheck("check")
