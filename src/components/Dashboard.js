@@ -555,7 +555,7 @@ const Dashboard = ({mobile}) => {
                         />
                     </Modal.Header>
                     <Modal.Content>
-                        <Grid divided>
+                        <Grid divided stackable >
                             <Grid.Row>
                                 <Grid.Column width={6}>
                                     <Form>
