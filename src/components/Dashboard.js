@@ -589,7 +589,7 @@ const Dashboard = ({mobile}) => {
                                                 <List.Item>
                                                     {m.group_name}
                                                     <Dropdown style={{float: "right"}} text='' icon="ellipsis vertical">
-                                                        <Dropdown.Menu>
+                                                        <Dropdown.Menu direction="left">
                                                             <Dropdown.Item icon="add" text='Add' onClick={() => openMember(m.id, m.group_name)} />
                                                             <Dropdown.Item icon="eye" text='View' onClick={() => viewMembers(m.id, m.group_name)} />
 
@@ -643,7 +643,7 @@ const Dashboard = ({mobile}) => {
                                                         <Card.Content>
                                                             <Card.Header>
                                                                 <Dropdown style={{float: "right"}}>
-                                                                    <Dropdown.Menu>
+                                                                    <Dropdown.Menu direction="left">
                                                                         <Dropdown.Item>
                                                                             <Icon name="download" />
                                                                             <Link to={[m.file_uploaded.slice(0, pos), substr, m.file_uploaded.slice(pos)].join('')}>
