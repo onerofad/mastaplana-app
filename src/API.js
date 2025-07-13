@@ -48,4 +48,40 @@ export function getFileToFolder(){
     )
 }
 
+export function getGroups(){
+    return(
+        axios.create({
+            baseURL: "https://backend-app-pied.vercel.app/api/groups/",
+            headers: {
+                "Content-Type": "application/json",
+                 Accept: "application/json"
+            }
+        })
+    )
+}
+
+export function getGroupMembers(){
+ return(
+        axios.create({
+            baseURL: "https://backend-app-pied.vercel.app/api/groupmembers/",
+            headers: {
+                "Content-Type": "application/json",
+                 Accept: "application/json"
+            }
+        })
+    )
+}
+
+export function getGroupUploads(){
+    return(
+        axios.create({
+            baseURL: "https://backend-app-pied.vercel.app/api/groupuploads/",
+            headers: {
+                "Content-Type": "application/json",
+                 Accept: "application/json"
+            }
+        })
+    )
+} 
+
 export const  mastaplana_file  =  '..//..//src//mastaplana_logo.jpg'
