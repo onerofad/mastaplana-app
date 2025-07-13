@@ -607,7 +607,6 @@ const Dashboard = ({mobile}) => {
                                     <Header
                                         content={"Group Mambers  " + name_group}
                                     />
-                                    <Divider />
                                     <List relaxed divided>
                                     {view_members.map(v => (
                                         
